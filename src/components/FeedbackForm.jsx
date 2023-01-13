@@ -23,21 +23,18 @@ function FeedbackForm() {
             setRating(10)        }
     }, [feedbackEdit])
     
-    const handleTextChange = (e) => {
-        let feedbackFormInput = document.getElementById('feedbackFormInput').value
-
-        if(feedbackFormInput === '') {
+    const handleTextChange = ({target: { value }}) => {
+        if(value === '') {
             setDisableButton(true)
             setMessage('')
-        } else if(feedbackFormInput !== '' && feedbackFormInput.trim().length < 10) {
+        } else if(value !== '' && value.trim().length < 10) {
             setDisableButton(true)
             setMessage('Text must be at least 10 characters')
         } else {
             setDisableButton(false)
             setMessage('')
         }       
-        setText(e.target.value);
-        setText(e.target.value)
+        setText(value)
     }
 
     const handleSubmit = (e) => {
@@ -48,7 +45,6 @@ function FeedbackForm() {
                 rating
             }
             feedbackEdit.edit ? updateFeedback(feedbackEdit.item.id, newFeedback) : addFeedback(newFeedback)
-            //addFeedback(newFeedback)   
         }
             text.trim().length < 10 && alert('Nice try!')
             setText('')

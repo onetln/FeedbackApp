@@ -4,6 +4,7 @@ import Header from './components/Header'
 import FeedbackForm from './components/FeedbackForm'
 import FeedbackList from './components/FeedbackList'
 import FeedbackStats from './components/FeedbackStats'
+import FeedbackSort from './components/FeedbackSort'
 import AboutPage from './pages/AboutPage'
 import AboutIconLink from './components/AboutIconLink'
 import {FeedbackProvider} from './context/FeedbackContext'
@@ -19,7 +20,8 @@ function App() {
                             <Route exact path='/' element={
                                 <>
                                     <FeedbackForm />
-                                    <FeedbackStats />                                    
+                                    <FeedbackStats />
+                                    <FeedbackSort />                                    
                                     <FeedbackList />
                                 </>
                             }>

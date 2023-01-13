@@ -36,7 +36,7 @@ header {
     position: relative;
     border-radius: 20px;
     background-color: #fff;
-    margin: 20px;
+    margin: 6px 20px 20px 20px;
     color: #000;
     padding: 20px 30px;
 }
@@ -79,6 +79,18 @@ header {
     margin-right: 4px;
 }
 
+.sorting {
+    margin: 0 35px;
+    padding: 0;
+    display: flex;
+    align-items: flex-end;
+}
+
+.sorting span {
+    font-size: 12px;
+    margin-left: auto;
+}
+
 .btn-sort {
     outline: none;
     background-color: transparent;
@@ -97,7 +109,6 @@ header {
 
 .btn-sort:active {
     transform: scale(0.90);
-
 }
 
 .card .close:hover,
@@ -171,7 +182,7 @@ header {
     background: #ff6a95;
   }
 
-  .cancel {
+.cancel {
     display: flex;
     margin-top: 5px;
 }
@@ -181,7 +192,7 @@ header {
     width: 20,65px;
 }
 
-  .message {
+.message {
       font-size: 12px;
       padding-left: 6px;
       color: purple;
@@ -234,7 +245,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 30px 35px 20px;
+    margin: 30px 35px 0px;
     font-size: 14px;
 }
 
@@ -272,8 +283,6 @@ header {
   .card-disabled {
       opacity: 0.5;
   }
-
-
 
   .pulse {
     background: #fcf2f2;

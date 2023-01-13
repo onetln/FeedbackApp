@@ -12,7 +12,15 @@ function FeedbackItem({ item }) {
     feedbackEdit.item.id !== item.id && setIsDisabled(feedbackEdit.edit)
   }, [feedbackEdit, item])
 
-  //const isDisabled = Object.keys(feedbackEdit.item).length > 0 && feedbackEdit.item.id !== item.id
+  useEffect(() => {
+    if (feedbackEdit.edit) {
+      window.scroll({
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth'
+      });
+    }
+  }, [feedbackEdit])
 
   return (
     <Card disabled={isDisabled} pulse={feedbackEdit.item.id === item.id && feedbackEdit.edit}> 

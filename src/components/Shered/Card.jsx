@@ -12,12 +12,14 @@ function Card({ children, reverse, disabled, pulse }) {
 Card.defaultProps = {
     reverse: false,
     disabled: false,
+    pulse: false,
 }
 
 Card.propTypes = {
     children: PropTypes.node.isRequired,
     reverse: PropTypes.bool,
     disabled: PropTypes.bool,
+    pulse: PropTypes.bool,
 }
 
 export default Card
