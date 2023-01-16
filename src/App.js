@@ -5,12 +5,14 @@ import FeedbackForm from './components/FeedbackForm'
 import FeedbackList from './components/FeedbackList'
 import FeedbackStats from './components/FeedbackStats'
 import FeedbackSort from './components/FeedbackSort'
-import AboutPage from './pages/AboutPage'
 import AboutIconLink from './components/AboutIconLink'
 import {FeedbackProvider} from './context/FeedbackContext'
+import React, {lazy, Suspense} from 'react'
+
+const AboutPage = lazy(() => import('./pages/AboutPage'))
 
 function App() {
-
+    
         return (
         <FeedbackProvider>
             <Router>
@@ -26,7 +28,11 @@ function App() {
                                 </>
                             }>
                             </Route>
-                            <Route path='/about' element={<AboutPage />} />
+                            <Route path='/about' element={
+                                <Suspense fallback={<h3>Loading...</h3>}>
+                                    <AboutPage />
+                                </Suspense>
+                            } />
                         </Routes>
                     </div>
                     <AboutIconLink />

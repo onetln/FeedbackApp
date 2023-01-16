@@ -1,8 +1,5 @@
-import {createContext, useState} from 'react'
-import { CurrentDateTime, sortByDate } from '../functions/HelperFunctions'
-import { v4 as uuidv4} from 'uuid'
-import FeedbackData from '../data/FeedbackData'
-
+import {createContext, useState, useEffect} from 'react'
+import { sortByDate } from '../functions/HelperFunctions'
 
 const FeedbackContext = createContext()
 
@@ -13,23 +10,42 @@ export const FeedbackProvider = ({children}) => {
         edit: false
     }
 
-    const [feedback, setFeedback] = useState(sortByDate(FeedbackData))
+    const [isLoading, setIsLoading] = useState(true)
+    const [feedback, setFeedback] = useState([])
     const [sortRatingAsc, setSortRatingAsc] = useState(false)
     const [sortRatingDesc, setSortRatingDesc] = useState(false)
     const [feedbackEdit, setFeedbackEdit] = useState(feedbackEditInitial)
 
-    const deleteFeedback = (id) => {
+    useEffect(() => {
+        fetchFeedback()
+    }, [])
+
+    const fetchFeedback = async () => {
+        const response = await fetch("/feedback?_sort=date&_order=desc")
+        const data = await response.json()
+        setFeedback(data)
+        setIsLoading(false)
+    }
+
+    const deleteFeedback = async (id) => {
         if (window.confirm('Delete feedback?')) {
+            await fetch(`/feedback/${id}`, {method: 'DELETE'})
             setFeedback(feedback.filter((item) => item.id !== id))
             setFeedbackEdit(feedbackEditInitial)
         }
     }
 
-    const addFeedback = (newFeedback) => {
-        newFeedback.id = uuidv4()
-        newFeedback.date = CurrentDateTime()
-        const sorted = [...sortByDate(feedback)]
-        setFeedback([newFeedback, ...sorted])
+    const addFeedback = async (newFeedback) => {
+        const response = await fetch("/feedback", {
+            method: 'POST',
+            headers: 
+            {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newFeedback)
+        })
+        const data = await response.json()
+        setFeedback([data, ...feedback])
         setSortRatingAsc(false)
         setSortRatingDesc(false)
     }
@@ -51,9 +67,17 @@ export const FeedbackProvider = ({children}) => {
         }
     }
 
-    const updateFeedback = (id, updatedFeedback) => {
-        updatedFeedback.date = CurrentDateTime()
-        setFeedback(feedback.map((item) => (item.id === id ? { ...item, ...updatedFeedback} : item)))
+    const updateFeedback = async (id, updatedFeedback) => {
+        const response = await fetch(`/feedback/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedFeedback)
+        })
+        
+        const data = await response.json()
+        setFeedback(feedback.map((item) => (item.id === id ? { ...item, ...data} : item)))
         setFeedbackEdit(feedbackEditInitial)
     }
 
@@ -72,6 +96,7 @@ export const FeedbackProvider = ({children}) => {
 
     return <FeedbackContext.Provider value={{
         feedback,
+        isLoading,
         feedbackEdit,
         sortRatingAsc,
         sortRatingDesc,
