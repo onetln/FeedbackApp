@@ -1,0 +1,28 @@
+{
+  "feedback": [
+    {
+      "rating": 8,
+      "text": "Feedback #1 from backend.",
+      "date": "2023-01-16T20:13:31.231Z",
+      "id": 1
+    },
+    {
+      "rating": "10",
+      "text": "Feedback #2 from backend.",
+      "date": "2023-01-13T08:53:04.251Z",
+      "id": 2
+    },
+    {
+      "rating": "7",
+      "text": "Feedback #3 from backend.",
+      "date": "2023-01-11T14:57:18.599Z",
+      "id": 3
+    },
+    {
+      "text": "this is a test test - updated",
+      "rating": 9,
+      "date": "2023-01-16T20:17:09.065Z",
+      "id": 4
+    }
+  ]
+}
