@@ -3,6 +3,7 @@ import { FaTimes, FaEdit } from "react-icons/fa";
 import Card from './Shered/Card'
 import {useContext, useState, useEffect} from 'react'
 import FeedbackContext from '../context/FeedbackContext'
+import {formatDate} from '../functions/HelperFunctions'
 
 function FeedbackItem({ item }) {
   const { deleteFeedback, feedbackEdit, editFeedback } = useContext(FeedbackContext)
@@ -35,7 +36,7 @@ function FeedbackItem({ item }) {
           </button>
          </div>
         <div className="text-display">{item.text}</div>
-        <div className='feedback-date'>Last update: {item.date}</div>
+        <div className='feedback-date'>Last update: {formatDate(new Date(item.date))}</div>
     </Card>
   )
 }
