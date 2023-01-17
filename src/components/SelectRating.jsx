@@ -13,6 +13,8 @@ function SelectRating({ number, select, selected }) {
         select(+e.currentTarget.value)
     }
 
+    console.log('selected: ' + selected)
+
   return (
      <ul className='rating'>{rows.map((row) => { 
          return (

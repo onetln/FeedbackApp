@@ -8,7 +8,7 @@ import FeedbackContext from '../context/FeedbackContext'
 function FeedbackForm() {
     const { addFeedback, feedbackEdit, editFeedback, updateFeedback } = useContext(FeedbackContext)
     const [text, setText] = useState('')
-    const [disabaleButton, setDisableButton] = useState(true)
+    const [disableButton, setDisableButton] = useState(true)
     const [message, setMessage] = useState('')
     const [rating, setRating] = useState(10)
 
@@ -56,6 +56,7 @@ function FeedbackForm() {
         e.preventDefault()
         editFeedback({})
         setRating(10)
+        setMessage('')
     }
 
 
@@ -66,8 +67,8 @@ function FeedbackForm() {
         <SelectRating number={10} selected={rating} select={(rating) => setRating(rating)}/>
         <div className="input-group">
             <input id='feedbackFormInput' onChange={handleTextChange} type="text" placeholder='Write a review' value={text}/>
-            <Button type='submit' isDisabled={disabaleButton}>{feedbackEdit.edit ? 'Update' : 'Send'}</Button>
-            <Button type='reset' isDisabled={disabaleButton} display={feedbackEdit.edit}>Cancel</Button>      
+            <Button type='submit' isDisabled={disableButton}>{feedbackEdit.edit ? 'Update' : 'Send'}</Button>
+            <Button type='reset' display={feedbackEdit.edit}>Cancel</Button>      
 
         </div>{message && <p className='message'>{message}</p>}
         <div className="cancel">
